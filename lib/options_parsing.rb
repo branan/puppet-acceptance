@@ -197,6 +197,26 @@ class Options
       opts.on('--pre PATH/TO/SCRIPT', 'Pass steps to be run prior to setup') do |step|
         @options[:pre_script] = step
       end
+
+      @options[:modroot] = false
+      opts.on('--modroot PATH/TO/MODULE/', 'Root directory of module to test') do |root|
+        require 'pathname'
+        @options[:modroot] = root
+        @options[:type] = "module"
+        setup_suite = "#{root}/acceptance/setup"
+        test_suite = "#{root}/acceptance/test"
+        @options[:tests] << setup_suite if Pathname(setup_suite).exist?
+        @options[:tests] << test_suite if Pathname(test_suite).exist?
+
+        if not @options[:modname]
+          @options[:modname] = Pathname(root).basename.to_s
+        end
+      end
+
+      @options[:modname] = false
+      opts.on('--modname MODNAME', 'Name of the module to test') do |name|
+        @options[:modname] = name
+      end
     end
 
     optparse.parse!

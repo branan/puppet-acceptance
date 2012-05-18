@@ -45,6 +45,9 @@ elsif options[:type] == 'cp_pe'
 elsif options[:type] == 'pe_aws'
   setup_options = options.merge({ :random => false,
                                   :tests => ["setup/pe_aws"] })
+elsif options[:type] == 'module'
+  setup_options = options.merge({ :random => false,
+                                  :tests  => ["setup/module"]})
 elsif options[:uninstall]
   setup_options = options.merge({ :random => false,
                                   :tests  => ["setup/early", "setup/pe_uninstall/#{options[:uninstall]}"] })
