@@ -1,5 +1,8 @@
 require 'pathname'
 
+# the spec fixtures will often have a recursive symlink. Unfortunately, our
+# ssh library doesn't let us skip traversing symlinks. This awful mess
+# exists so that we can get those symlinks out of the module.
 fixtures = Pathname("#{options[:modroot]}/spec/fixtures")
 tmpdir = false
 if fixtures.exist?
