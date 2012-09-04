@@ -34,40 +34,40 @@ Running Systest requires at least one 'System Under Test' (SUT) upon which to ru
   - The config file is yaml formatted
   - The type of insallation and configuration is dictated by the config file, especialy for PE
 
-    HOSTS:
-      ubuntu-1004-64:
-        roles:
-          - master
-          - agent
-          - dashboard
-        platform: ubuntu-10.04-amd64
-      ubuntu-1004-32:
-        roles:
-          - agent
-        platform: ubuntu-10.04-i386
-    CONFIG:
-      consoleport: 443
+        HOSTS:
+          ubuntu-1004-64:
+            roles:
+              - master
+              - agent
+              - dashboard
+            platform: ubuntu-10.04-amd64
+          ubuntu-1004-32:
+            roles:
+              - agent
+            platform: ubuntu-10.04-i386
+        CONFIG:
+          consoleport: 443
 
 
 Here we have the host 'ubuntu-1004-64', a 64 bit Ubuntu box, serving as Puppet Master,
 Dashboard, and Agent; the host "ubuntu-1004-32", a 32-bit Ubunutu node, will be a 
 Puppet Agent only.  The Dashboard will be configured to run HTTPS on port 443.
 
-You can setup a very different test scenario by simply re-arranging the "roles":
+  - You can setup a very different test scenario by simply re-arranging the "roles":
 
-    HOSTS:
-      ubuntu-1004-64:
-        roles:
-          - dashboard
-          - agent
-        platform: ubuntu-10.04-amd64
-      ubuntu-1004-32:
-        roles:
-          - master
-          - agent
-        platform: ubuntu-10.04-i386
-    CONFIG:
-      consoleport: 443
+        HOSTS:
+          ubuntu-1004-64:
+            roles:
+              - dashboard
+              - agent
+            platform: ubuntu-10.04-amd64
+          ubuntu-1004-32:
+            roles:
+              - master
+              - agent
+            platform: ubuntu-10.04-i386
+        CONFIG:
+          consoleport: 443
 
 In this case, the host 'ubuntu-1004-32' is now the Puppet Master, while 'ubuntu-1004-64' is the
 Puppet Dashboard host, resulting in a split Master/Dashboard install.  Systest will automagically 
@@ -136,9 +136,9 @@ Pre-requisite: Blimpy gem installed and .fog file correctly configured with your
 Currently, there is limited support EC2 nodes; we are adding support for new platforms shortly.
 
 AMIs are built for PE based installs on:
-  Enterprize Linux 6, 64 and 32 bit
-  Enterprize Linux 5, 32 bit
-  Ubuntu 10.04, 32 bit
+  - Enterprize Linux 6, 64 and 32 bit
+  - Enterprize Linux 5, 32 bit
+  - Ubuntu 10.04, 32 bit
 
 Systest will automagically provision EC2 nodes, provided the 'platform:' section of your config file
 lists a supported platform type: ubuntu-10.04-i386, el-6-x86_64, el-6-i386, el-5-i386.
