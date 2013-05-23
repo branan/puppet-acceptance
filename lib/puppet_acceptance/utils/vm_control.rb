@@ -324,8 +324,11 @@ module PuppetAcceptance
     
         @logger.notify "Connecting to vsphere at #{vsphere_credentials[:server]}" +
           " with credentials for #{vsphere_credentials[:user]}"
-    
+      begin
         vsphere_helper = VsphereHelper.new( vsphere_credentials )
+      rescue Exception => e
+        puts e
+      end
         vsphere_vms = {}
     
         start = Time.now
